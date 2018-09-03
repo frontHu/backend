@@ -2,8 +2,8 @@
   <div class="slider">
     <div class="silder-header"></div>
     <div class="slider-list">
-      <ul v-for="menuItem in theModel">
-        <Menu :model="menuItem"></Menu>
+      <ul class="slider-item" v-for="(menuItem, index) in theModel" :key="index">
+        <Menu :model="menuItem" :icon="menuItem.icon"></Menu>
       </ul>
     </div>
   </div>
@@ -16,40 +16,28 @@ export default {
   data() {
     return {
       theModel: [
+        
         {
-          id: "1",
-          menuName: "导航1",
-          menuCode: "10",
-          childMenus: [
-            {
-              menuName: "用户管理",
-              menuCode: "11",
-              childMenus: [
-                {
-                  menuName: "11111",
-                  menuCode: "12",
-                  childMenus: []
-                }
-              ]
-            },
-            {
-              menuName: "角色管理",
-              menuCode: "12",
-              childMenus: []
-            },
-            {
-              menuName: "菜单管理",
-              menuCode: "13",
-              childMenus: []
-            }
-          ]
+          id: "2",
+          menuName: "这是我的文章",
+          icon: require('./../../assets/icon2.png'),
+          childMenus: [{
+            id: '2-1',
+            menuName: '前端小栈',
+            icon: require('./../../assets/icon2-1.png'),
+            parent: 1
+          }, {
+            id: '2-2',
+            menuName: '其他东东',
+            icon: require('./../../assets/icon2-2.png'),
+            parent: 1
+          }]
         },
         {
           id: "1",
-          menuName: "导航2",
-          menuCode: "10",
-          childMenus: []
-        }
+          menuName: "写一篇文章",
+          icon: require('./../../assets/icon1.png')
+        },
       ]
     };
   },
@@ -75,6 +63,10 @@ export default {
   }
   .slider-list {
     padding: 10px 0;
+    height: 100%;
+    .slider-item {
+      display: block;
+    }
   }
 }
 </style>
