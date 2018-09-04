@@ -1,6 +1,6 @@
 <template>
   <li>
-    <span @click="toggle(model.menuName,model.menuUrl,model.menuPath)">
+    <span >
       <i v-if="!isFolder" class="icon file-text">●</i>
       {{ model.menuName }}
       <i v-if="isFolder" class="icon" :class="[open ? 'folder-open': 'folder']"></i>
