@@ -3,8 +3,11 @@
     <div class="markdown-title">
       <input v-model="title" type="text" placeholder="文章标题">
     </div>
+    <div class="markdown-desc">
+      <input v-model="desc" type="text" placeholder="写点描述吧" />
+    </div>
     <div class="markdown-btn">
-      <el-button type="primary" size="small">发布文章</el-button>
+      <el-button type="primary" size="small" @click="subArticle">发布文章</el-button>
       <el-button type="danger" size="small">删除</el-button>
       <el-button size="small">保存草稿</el-button>
     </div>
@@ -21,14 +24,19 @@ import highlight from "highlight.js";
 import "./../../assets/css/simplemde.css";
 import "./../../assets/css/atom-one-dark.css";
 import {
-  button
-} from 'element-ui'
+  button,
+  Message
+} from 'element-ui';
+import {
+  saveBlogApi
+} from './../../api/blog.api.js'
 export default {
   name: "Markdown",
   data() {
     return {
-      title: "",
-      content: ""
+      title: "这是文章的title",
+      content: "",
+      desc: "这是文章的desc"
     }
   },
   component: {
@@ -59,6 +67,27 @@ export default {
       var value = smde.value();
       this.content = value
     });
+  },
+  methods: {
+    subArticle() {
+      if(!this.title || !this.content) {
+        this.$message({
+          message: '请填写完整内容',
+          type: 'warning'
+        })
+        return
+      }
+      
+      let params = {
+        title: this.title,
+        desc: this.desc,
+        content: this.content,
+        time: (new Date()).getTime()
+      }
+      saveBlogApi(params).then(res => {
+        console.log(res, 'resssss')
+      })
+    }
   }
 };
 </script>
@@ -67,7 +96,7 @@ export default {
 .markdown {
   width: 100%;
   height: 100%;
-  .markdown-title {
+  .markdown-title, .markdown-desc {
     width: 100%;
     height: 45px;
     border-bottom: 1px solid #f1f1f1;
@@ -79,6 +108,13 @@ export default {
       outline: none;
       font-size: 20px;
       padding-left: 20px;
+    }
+  }
+  .markdown-desc {
+    height: 30px;
+    input {
+      box-sizing: border-box;
+      font-size: 14px;
     }
   }
   .markdown-main {
