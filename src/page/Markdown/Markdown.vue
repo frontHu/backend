@@ -21,32 +21,85 @@
 import SimpleMDE from "simplemde";
 import marked from "marked";
 import highlight from "highlight.js";
-import "./../../assets/css/simplemde.css";
 import "./../../assets/css/atom-one-dark.css";
-import {
-  button,
-  Message
-} from 'element-ui';
-import {
-  saveBlogApi
-} from './../../api/blog.api.js'
+import "./../../assets/css/simplemde.css";
+import { button, Message } from "element-ui";
+import { saveBlogApi } from "./../../api/blog.api.js";
 export default {
   name: "Markdown",
   data() {
     return {
-      title: "这是文章的title",
+      title: "",
       content: "",
-      desc: "这是文章的desc"
-    }
+      desc: ""
+    };
   },
-  component: {
+  components: {
     elButton: button
   },
   mounted() {
     var smde = new SimpleMDE({
       element: document.getElementById("markdown"),
+      autoDownloadFontAwesome: true,
       autofocus: true,
-      autosave: true,
+      autosave: {
+        enabled: true,
+        uniqueId: "MyUniqueID",
+        delay: 1000
+      },
+      blockStyles: {
+        bold: "__",
+        italic: "_"
+      },
+      forceSync: true,
+      hideIcons: ["guide", "heading"],
+      indentWithTabs: false,
+      insertTexts: {
+        horizontalRule: ["", "\n\n-----\n\n"],
+        image: ["![](http://", ")"],
+        link: ["[", "](http://)"],
+        table: [
+          "",
+          "\n\n| Column 1 | Column 2 | Column 3 |\n| -------- | -------- | -------- |\n| Text     | Text      | Text     |\n\n"
+        ]
+      },
+      lineWrapping: true,
+      parsingConfig: {
+        allowAtxHeaderWithoutSpace: true,
+        strikethrough: true,
+        underscoresBreakWords: false
+      },
+      renderingConfig: {
+        singleLineBreaks: true,
+        codeSyntaxHighlighting: true
+      },
+      shortcuts: {
+        drawTable: "Cmd-Alt-T"
+      },
+      // showIcons: ["code", "table"],
+      spellChecker: false,
+      status: false,
+      status: ["autosave", "lines", "words", "cursor"], // Optional usage
+      status: [
+        "autosave",
+        "lines",
+        "words",
+        "cursor",
+        {
+          className: "keystrokes",
+          defaultValue: function(el) {
+            this.keystrokes = 0;
+            el.innerHTML = "0 Keystrokes";
+          },
+          onUpdate: function(el) {
+            el.innerHTML = ++this.keystrokes + " Keystrokes";
+          }
+        }
+      ], // Another optional usage, with a custom status bar item that counts keystrokes
+      styleSelectedText: true,
+      tabSize: 4,
+      // toolbar: true,
+      // toolbarTips: true,
       previewRender: function(plainText) {
         return marked(plainText, {
           renderer: new marked.Renderer(),
@@ -63,30 +116,30 @@ export default {
         });
       }
     });
-    smde.codemirror.on("change", ()=>{
+    smde.codemirror.on("change", () => {
       var value = smde.value();
-      this.content = value
+      this.content = smde.markdown(value);
     });
   },
   methods: {
     subArticle() {
-      if(!this.title || !this.content) {
+      if (!this.title || !this.content) {
         this.$message({
-          message: '请填写完整内容',
-          type: 'warning'
-        })
-        return
+          message: "请填写完整内容",
+          type: "warning"
+        });
+        return;
       }
-      
+
       let params = {
         title: this.title,
         desc: this.desc,
         content: this.content,
-        time: (new Date()).getTime()
-      }
+        time: new Date().getTime()
+      };
       saveBlogApi(params).then(res => {
-        console.log(res, 'resssss')
-      })
+        console.log(res, "resssss");
+      });
     }
   }
 };
@@ -96,7 +149,8 @@ export default {
 .markdown {
   width: 100%;
   height: 100%;
-  .markdown-title, .markdown-desc {
+  .markdown-title,
+  .markdown-desc {
     width: 100%;
     height: 45px;
     border-bottom: 1px solid #f1f1f1;
