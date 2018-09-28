@@ -5,5 +5,5 @@
 
 ![](http://img1.timeface.cn/times/747b92248451be68e7dc40534ec7538c.png)
 
-#### 博客
+#### 博客页
 ![](http://img1.timeface.cn/times/b82fc632cce48c3c8ba508f1bb2a4b1c.png)
