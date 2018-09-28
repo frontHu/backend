@@ -1,7 +1,7 @@
 import axios from 'axios'
 // import queryString from './../untils/querysting'
 
-const base_url = '/api'
+const base_url = '/server'
 
 export default function fetch(url, data) {
   return new Promise((resolve, reject) => {
