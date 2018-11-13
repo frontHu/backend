@@ -1,7 +1,7 @@
 import axios from 'axios'
 // import queryString from './../untils/querysting'
 
-const base_url = '/server'
+const base_url = process.env.NODE_ENV === 'production' ? '/api' : '/server'
 
 export default function fetch(url, data) {
   return new Promise((resolve, reject) => {

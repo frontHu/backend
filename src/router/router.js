@@ -5,6 +5,7 @@ import Login from './../page/Login/Login.vue'
 import Home from './../page/Home/Home.vue'
 import Markdown from './../page/Markdown/Markdown.vue'
 import Article from './../page/Article/Article.vue'
+import Friend from './../page/Friend/Friend.vue'   
 
 Vue.use(Router)
 
@@ -23,7 +24,8 @@ export default new Router({
       children: [
         {path: '', component: Markdown},
         {path: 'markdown', component: Markdown},
-        {path: 'article/:id', component: Article}
+        {path: 'article/:id', component: Article},
+        {path: 'friends', component: Friend}
       ]
     }
   ]

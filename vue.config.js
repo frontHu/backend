@@ -1,16 +1,16 @@
 module.exports = {
   devServer: {
     host: 'localhost',
-    port: 8080,
+    port: 9999,
     proxy: {
       '/server': {
-        target: 'http://localhost:3333',
+        target: 'http://localhost:8080',
         pathRewrite: {
-          '^/server': 'http://localhost:3333'
+          '^/server': 'http://localhost:8080'
         },
-        changeOrigin: false
+        changeOrigin: false 
       }
     }
   },
-  baseUrl: process.env.NODE_ENV === 'production' ? 'http://zw-lazy.cn/backend/' : '/'
+  baseUrl: process.env.NODE_ENV === 'production' ? 'http://47.98.177.236:80/backend' : '/'
 }
