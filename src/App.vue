@@ -6,7 +6,6 @@
 
 <style>
 * {
-  
   box-sizing: border-box;
 }
 html, body {

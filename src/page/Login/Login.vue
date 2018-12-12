@@ -9,13 +9,16 @@
         placeholder="admin"
       >
       <input 
-        v-model="password" 
-        @input="inputHandle($event,'password')" 
+        v-model.number="password" 
         type="text"
         class="password"
         placeholder="password"
       >
-      <button class="login-btn" @click="handleLogin">Login</button>
+      <span>{{password}}</span>
+      <button 
+        class="login-btn"
+        @click="handleLogin"
+      >Login</button>
     </div>
   </div>
 </template>
@@ -31,9 +34,13 @@ export default {
   },
   methods: {
     handleLogin() {
+      console.log('tag', '')
     },
     inputHandle(e, type) {
       this[type] = e.target.value
+    },
+    handleKey(e) {
+      console.log(e.keyCode)
     }
   }
 };

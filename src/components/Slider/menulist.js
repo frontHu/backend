@@ -5,6 +5,13 @@ export default [
     parent: -1,
     icon: require('./../../assets/icon1.png'),
     link: "/home/markdown",
+    childMenus: [{
+      id: "1",
+    menuName: "写一篇文章",
+    parent: -1,
+    icon: require('./../../assets/icon1.png'),
+    link: "/home/markdown",
+    }]
   },
   {
     id: "2",

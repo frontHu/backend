@@ -51,7 +51,7 @@
 </template>
 
 <script>
-import { addFriend } from './../../api/friend.api.js'
+// import { addFriend } from './../../api/friend.api.js'
 export default {  
   name: 'Friend',
   data() {
@@ -61,18 +61,20 @@ export default {
       desc: '',
       blog: '',
       github: '',
-      imageUrl: ''
+      imageUrl: '',
+      searchText: '',
+      searchText1: ''
     }
   },
   methods: {
-    uploadImg(e) {
-      let file = e.target.files[0]
-      let formData = new FormData()
-      formData.append('file', file)
-      addFriend(formData).then(res => {
-        console.log(res, 'res') 
-      })
-    }
+    // uploadImg(e) {
+    //   let file = e.target.files[0]
+    //   let formData = new FormData()
+    //   formData.append('file', file)
+    //   addFriend(formData).then(res => {
+    //     console.log(res, 'res') 
+    //   })
+    // }
   }
 }
 </script>

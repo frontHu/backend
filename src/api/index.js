@@ -1,5 +1,4 @@
 import axios from 'axios'
-// import queryString from './../untils/querysting'
 
 const base_url = process.env.NODE_ENV === 'production' ? '/api' : '/server'
 

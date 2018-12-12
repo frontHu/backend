@@ -24,7 +24,7 @@ export default new Router({
       children: [
         {path: '', component: Markdown},
         {path: 'markdown', component: Markdown},
-        {path: 'article/:id', component: Article},
+        {path: 'article', component: Article},
         {path: 'friends', component: Friend}
       ]
     }
